@@ -2,7 +2,7 @@ package uk.ac.westminster.products_api;
 
 public class Customer {
 
-    private long id;
+    private Long id;
     private String name;
     private String email;
     private Address address;
@@ -16,7 +16,7 @@ public class Customer {
         this.address = address;
     }
 
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public Address getAddress() { return address; }
