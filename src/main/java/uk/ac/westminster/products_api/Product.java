@@ -38,6 +38,4 @@ public class Product {
         this.price = price;
     }
 
-    public void add(Product product) {
-    }
 }

@@ -1,13 +1,11 @@
+
 package uk.ac.westminster.products_api;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.spi.ToolProvider.findFirst;
 
 @Service
 public class ProductService {
@@ -15,13 +13,35 @@ public class ProductService {
     private static List<Product> products = new ArrayList<>();
     private long nextId = 1L;
 
+    //Both DigitalProduct and PhysicalProduct inherit id, name and price from the Product superclass.
+    public ProductService(){
+
+        DigitalProduct digital = new DigitalProduct(
+                0L,
+                "Learning Java",
+                2500.00,
+                "https://www.google.com"
+        );
+
+        PhysicalProduct physical = new PhysicalProduct(
+                0L,
+                "Computer Mouse",
+                3500.00,
+                0.2,
+                "10 x 6 x 4 cm"
+        );
+
+        addProduct(digital);
+        addProduct(physical);
+    }
+
     public List<Product> getAllProducts() {
         return products;
     }
 
-    public Product addProducts(Product product){
+    public Product addProduct(Product product) {
         product.setId(nextId++);
-        product.add(product);
+        products.add(product);
         return product;
     }
 
@@ -31,15 +51,11 @@ public class ProductService {
                 .findFirst();
     }
 
-    public Product addProduct(Product product) {
-        return product;
-    }
-
     public void deleteProduct(Long id) {
         products.removeIf(p -> p.getId().equals(id));
     }
 
-    public List<Product> findByName(String name){
+    public List<Product> findByName(String name) {
         return products.stream()
                 .filter(p -> p.getName().contains(name))
                 .toList();
